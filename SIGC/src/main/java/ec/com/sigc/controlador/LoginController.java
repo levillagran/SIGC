@@ -27,8 +27,6 @@ public class LoginController {
 	@PostMapping("/checklogin")
 	public ModelAndView saveAdmin(Usuario usu) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(usu.getUsuario());
-		System.out.println(usu.getClave());
 		User user = userServicio.autenticacion(usu);
 		int role = user.getRoleId().getRoleId();
 
@@ -48,8 +46,8 @@ public class LoginController {
 		default:
 			mav.setViewName("login");
 		}
-		//mav.addObject("username", user.getUsuario());
-		//mav.addObject("role", role);
+		mav.addObject("username", user.getUsuario());
+		mav.addObject("role", role);
 		return mav;
 	}
 

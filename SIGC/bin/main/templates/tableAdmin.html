@@ -10,8 +10,8 @@
 		<div class="card mb-3">
 
 			<div class="card-header">
-				<i class="fas fa-table"> Data Administrators</i> <br /> <a><button
-						class="btn btn-secondary fas fa-user-plus nBtn" th:href="@{editAdmin/(username=${username})}" id="nBtn" title="New Administrator"></button></a>
+				<i class="fas fa-table"> Administradores</i> <br /> <a><button
+						class="btn btn-sm btn-secondary fas fa-user-plus nBtn" th:href="@{editAdmin/(username=${username})}" id="nBtn" title="Nuevo"></button></a>
 			</div>
 
 			<div class="card-body">
@@ -19,51 +19,32 @@
 					<table class="table table-bordered ">
 						<thead class="thead-light">
 							<tr>
-								<th>Actions</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Role</th>
-								<th>Enabled</th>
+								<th>Acción</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Rol</th>
+								<th>habilidado</th>
 								<th>Mail</th>
-								<th>Address</th>
-								<th>Phone 1</th>
-								<th>Phone 2</th>
-								<th>User Name</th>
-								<th>Password</th>
-								
+								<th>Dirección</th>
+								<th>Telefono</th>
+								<th>Usuario</th>								
 							</tr>
 						</thead>
-						<tfoot class="thead-light">
-							<tr>
-								<th>Actions</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Role</th>
-								<th>Enabled</th>
-								<th>Mail</th>
-								<th>Address</th>
-								<th>Phone 1</th>
-								<th>Phone 2</th>
-								<th>User Name</th>
-								<th>Password</th>
-							</tr>
-						</tfoot>
+
 						<tbody>
 							<tr th:each="contact : ${contacts}">
 								<td><a th:href="@{editAdmin/(id=${contact.userId},username=${username})}"
-										class="btn btn-primary fas fa-pencil-alt eBtn" title="Edit"></a> <a
+										class="btn btn-sm btn-primary fas fa-pencil-alt eBtn" title="Edit"></a> <a
 										th:href="@{/deleteAdmin/(adminId=${contact.userId},username=${username})}"
-										class="btn btn-danger fas fa-trash-alt dBtn" title="Delete"></a></td>
+										class="btn btn-sm btn-danger fas fa-trash-alt dBtn" title="Delete"></a></td>
 								<td th:text="${contact.nombre}"></td>
 								<td th:text="${contact.apellido}"></td>
 								<td th:text="${contact.roleId.rol}"></td>
 								<td th:text="${contact.enabled}"></td>
-								<td th:text="${contact.correoElectronico}"></td>
+								<td th:text="${contact.mail}"></td>
 								<td th:text="${contact.direccion}"></td>
-								<td th:text="${contact.numeroTelefono1}"></td>
-								<td th:text="${contact.numeroTelefono2}"></td>
+								<td th:text="${contact.telefono}"></td>
 								<td th:text="${contact.usuario}"></td>
-								<td>*****</td>
 								
 								
 							</tr>

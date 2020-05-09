@@ -27,6 +27,8 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 
+
+
 </head>
 
 <body id="page-top">
@@ -34,6 +36,11 @@
 	<nav class="navbar navbar-expand navbar-dark static-top"
 		style="background-color: #43bdf0;">
 		<a class="navbar-brand mr-1" href="index.html">SIGC</a>
+
+		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
+			id="sidebarToggle">
+			<i class="fas fa-bars"></i>
+		</button>
 
 		<!-- Navbar Search -->
 		<form
@@ -63,41 +70,36 @@
 		<ul class="sidebar navbar-nav" style="background-color: #49575f;">
 			<li class="nav-item active"><a class="nav-link"
 				href="dashboardBack.html"> <i class="fas fa-user-circle fa-fw"></i>
-					<span>Back-office, <span th:text="${username}"></span></span><span>Role,
+					<span>Consultor, <span th:text="${username}"></span></span> <span>Role,
 						<span th:text="${role}"></span></a></li>
-
-
-			<!-- Cuenta del cliente -->
+			
+			<!-- tabla auditorias asignadas -->
 			<li class="nav-item"><a
-				th:href="@{tableAuditsRequests/(usuario=${username})}"
-				class="nav-link tRequests"> <i class="fas fa-fw fa-list-alt"></i>
-					<span>Asignar Consultorias</span></a></li>
-
-			<!-- consulta sus auditorias -->
+				th:href="@{tableAssignedAudits/(usuario=${username})}"
+				class="nav-link tAAA"> <i class="fas fa-fw fa-list-alt"></i> <span>Assigned
+						audits</span></a></li>
+			<!-- tabla auditorias enviadas con no conformidades -->
 			<li class="nav-item"><a
-				th:href="@{tableAuditsProsesing/(usuario=${username})}"
-				class="nav-link tProsesing"> <i class="fas fa-fw fa-list-alt"></i>
-					<span>Consultorias</span></a></li>
-
-			<!-- ROLES -->
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>Nómina</span>
-			</a>
-				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<h6 class="dropdown-header">Gestionar:</h6>
-					<a class="dropdown-item tAudi" href="#">Consultores</a> <a
-						class="dropdown-item tCust" href="#">Clientes</a>
-				</div></li>
-
+				th:href="@{tableAuditsSendNC/(usuario=${username})}"
+				class="nav-link tANC"> <i class="fas fa-fw fa-list-alt"></i> <span>Audit
+						sent with NC</span></a></li>
+			<!-- tabla auditorias para checkear los archivos -->
+			<li class="nav-item"><a
+				th:href="@{tableAssignedAuditsCheck/(usuario=${username})}"
+				class="nav-link tACH"> <i class="fas fa-fw fa-list-alt"></i> <span>Audit
+						to check files</span></a></li>
+			<!-- tabla historial de auditorias -->
+			<li class="nav-item"><a
+				th:href="@{tableAssignedAuditsH/(usuario=${username})}"
+				class="nav-link tAH"> <i class="fas fa-fw fa-list-alt"></i> <span>Audit
+						history</span></a></li>
 		</ul>
 
 		<div id="content-wrapper">
 
 			<!-- Cargar contenido -->
 			<div class="container-fluid">
-				<div id="seccionRecargarBack"></div>
+				<div id="seccionRecargarAuditoriasAsignadas"></div>
 			</div>
 
 
@@ -106,7 +108,7 @@
 			<footer class="sticky-footer">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright © SIGC-UCE 2020</span> <br /> <br />
+						<span>Copyright © SIGA-UCE 2019</span> <br /> <br />
 						<script>
 							document.write(new Date())
 						</script>
@@ -148,22 +150,16 @@
 		</div>
 	</div>
 
-	<!-- jquery-3.5.0.js -->
-	<script th:src="@{/js/jquery-3.5.0.js}"
-		src="../static/js/jquery-3.5.0.js"></script>
-
-	<!-- Load contenido-->
-	<script th:src="@{/js/dashboardBack.js}"
-		src="../static/js/dashboardBack.js"></script>
-
 	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
+	<!-- <script src="vendor/jquery/jquery.min.js"></script> -->
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Page level plugin JavaScript-->
+	<script src="vendor/chart.js/Chart.min.js"></script>
 	<script src="vendor/datatables/jquery.dataTables.js"></script>
 	<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
@@ -172,6 +168,7 @@
 
 	<!-- Demo scripts for this page-->
 	<script src="js/demo/datatables-demo.js"></script>
+	<script src="js/demo/chart-area-demo.js"></script>
 
 </body>
 

@@ -54,17 +54,17 @@ public class UserServicioImpl implements UserServicio {
 
 	@Override
 	public List<User> findAllAdmin() {
-		return userRepository.findAllByRoleId(roleSysRepository.findById(4).get());
+		return userRepository.findAllByRoleId(roleSysRepository.findById(1).get());
 	}
 
 	@Override
 	public List<User> findAllConsul() {
-		return userRepository.findAllByRoleId(roleSysRepository.findById(2).get());
+		return userRepository.findAllByRoleId(roleSysRepository.findById(3).get());
 	}
 
 	@Override
 	public List<User> findAllCust() {
-		return userRepository.findAllByRoleId(roleSysRepository.findById(1).get());
+		return userRepository.findAllByRoleId(roleSysRepository.findById(4).get());
 	}
 
 	@Override

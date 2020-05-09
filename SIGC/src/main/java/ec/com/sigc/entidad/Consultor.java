@@ -88,6 +88,13 @@ public class Consultor implements Serializable {
 		this.informeList = informeList;
 	}
 
+	public Consultor(Integer consultorId, BigInteger imei, User userId) {
+		super();
+		this.consultorId = consultorId;
+		this.imei = imei;
+		this.userId = userId;
+	}
+
     
     
 }

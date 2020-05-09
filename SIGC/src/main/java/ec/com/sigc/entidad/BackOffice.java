@@ -85,6 +85,13 @@ public class BackOffice implements Serializable {
 		this.informeList = informeList;
 	}
 
+	public BackOffice( Integer backOfficeId, String cedula, User userId) {
+		super();
+		this.backOfficeId = backOfficeId;
+		this.cedula = cedula;
+		this.userId = userId;
+	}
+
 	public BackOffice() {
 		
 	}
