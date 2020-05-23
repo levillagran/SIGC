@@ -10,7 +10,7 @@ import ec.com.sigc.entidad.SolicitudConsultoria;
 
 @Repository("checkListRepository")
 public interface CheckListRepository extends JpaRepository<CheckList, Serializable>{
-	public abstract List<CheckList> findAllBySolicitudAuditoriaId(SolicitudConsultoria sa);
+	public abstract List<CheckList> findAllBySolicitudConsultoriaId(SolicitudConsultoria sa);
 	public abstract CheckList findByCodigo(int codigo);
 	
 }

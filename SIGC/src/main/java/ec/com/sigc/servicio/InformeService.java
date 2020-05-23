@@ -1,8 +1,9 @@
-package ec.com.siga.service;
+package ec.com.sigc.servicio;
 
 import java.util.List;
 
-import ec.com.siga.entity.Informe;
+import ec.com.sigc.entidad.Informe;
+
 
 public interface InformeService {
 	public abstract List<Informe> findAllReport();

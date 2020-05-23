@@ -27,7 +27,6 @@ public class BackOffice implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
     @NotNull
     @Column(name = "BACKOFFICE_ID")
     private Integer backOfficeId;

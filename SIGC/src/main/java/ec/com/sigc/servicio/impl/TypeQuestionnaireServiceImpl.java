@@ -1,4 +1,4 @@
-package ec.com.siga.service.impl;
+package ec.com.sigc.servicio.impl;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import ec.com.siga.entity.TipoAuditoria;
-import ec.com.siga.repository.QuestJpaRepository;
-import ec.com.siga.repository.TipoAudiRepository;
-import ec.com.siga.service.TypeQuestionnaireService;
+import ec.com.sigc.entidad.TipoConsultoria;
+import ec.com.sigc.repositorio.QuestJpaRepository;
+import ec.com.sigc.repositorio.TipoConsRepository;
+import ec.com.sigc.servicio.TypeQuestionnaireService;
 
 @Service("typeQuestionnaireService")
 public class TypeQuestionnaireServiceImpl implements TypeQuestionnaireService {
@@ -19,16 +19,16 @@ public class TypeQuestionnaireServiceImpl implements TypeQuestionnaireService {
 	private QuestJpaRepository questRepository;
 
 	@Autowired
-	@Qualifier("tipoAudiRepository")
+	@Qualifier("tipoConsRepository")
 	private TipoConsRepository tipoAudiRepository;
 
 	@Override
-	public List<TipoAuditoria> findAllTypeQuestionnaire() {
+	public List<TipoConsultoria> findAllTypeQuestionnaire() {
 		return tipoAudiRepository.findAll();
 	}
 
 	@Override
-	public TipoAuditoria findTypeQuestionnaire(Integer id) {
+	public TipoConsultoria findTypeQuestionnaire(Integer id) {
 		return tipoAudiRepository.findById(id).get();
 	}
 
@@ -38,7 +38,7 @@ public class TypeQuestionnaireServiceImpl implements TypeQuestionnaireService {
 	}
 
 	@Override
-	public void saveTypeQuestionnaire(TipoAuditoria typeQuestionnaire) {
+	public void saveTypeQuestionnaire(TipoConsultoria typeQuestionnaire) {
 		tipoAudiRepository.save(typeQuestionnaire);
 		
 	}

@@ -25,7 +25,6 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
     @NotNull
     @Column(name = "CLIENTE_ID")
     private Integer clienteId;
@@ -94,6 +93,15 @@ public class Cliente implements Serializable {
 		this.userId = userId;
 	}
 	
+	public Cliente(@NotNull Integer clienteId, @Size(max = 13) String ruc, @Size(max = 30) String nombreEmpresa,
+			User userId) {
+		super();
+		this.clienteId = clienteId;
+		this.ruc = ruc;
+		this.nombreEmpresa = nombreEmpresa;
+		this.userId = userId;
+	}
+
 	public Cliente() {
 		
 	}

@@ -12,6 +12,7 @@ import ec.com.sigc.entidad.DatoComun;
 import ec.com.sigc.entidad.Informe;
 import ec.com.sigc.entidad.SolicitudConsultoria;
 import ec.com.sigc.entidad.TipoConsultoria;
+import ec.com.sigc.modelo.SolucitudConsultoriaString;
 import ec.com.sigc.repositorio.CustRepository;
 import ec.com.sigc.repositorio.DatoComunRepository;
 import ec.com.sigc.repositorio.EstadoConRepository;
@@ -66,7 +67,7 @@ public abstract class ConsServiceImpl implements ConsService {
 
 		soliAud.setFechaInicio(new SimpleDateFormat("yyyy-MM-dd").parse(sas.getAuxfechaInicio()));
 		soliAud.setFechaFinal(new SimpleDateFormat("yyyy-MM-dd").parse(sas.getAuxfechaFinal()));
-		soliAud.setTipoAuditoriaId(TipoConsRepository.findById(Integer.parseInt(sas.getAuxTipoAuditoriaId())).get());
+		//soliAud.setTipoConsultoriaId(TipoConsRepository.findById(Integer.parseInt(sas.getAuxTipoConsultoriaId())).get());
 		soliAud.setEstadoConsultoriaId(estadoConRepository.findById(1).get());
 		solicitudConRepository.save(soliAud);
 		System.out.println("id solicitud: "+soliAud.getSolicitudConsultoriaId());

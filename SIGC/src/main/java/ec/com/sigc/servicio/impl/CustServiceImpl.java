@@ -1,17 +1,17 @@
-package ec.com.siga.service.impl;
+package ec.com.sigc.servicio.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import ec.com.siga.entity.Cliente;
-import ec.com.siga.entity.ClienteTipo;
-import ec.com.siga.entity.User;
-import ec.com.siga.repository.CustRepository;
-import ec.com.siga.repository.TipoCustRepository;
-import ec.com.siga.service.CustService;
-import ec.com.siga.service.UserServicio;
+import ec.com.sigc.entidad.Cliente;
+//import ec.com.sigc.entidad.ClienteTipo;
+import ec.com.sigc.entidad.User;
+import ec.com.sigc.repositorio.CustRepository;
+//import ec.com.sigc.repositorio.TipoCustRepository;
+import ec.com.sigc.servicio.CustService;
+import ec.com.sigc.servicio.UserServicio;
 
 @Service("custService")
 public class CustServiceImpl implements CustService {
@@ -20,9 +20,12 @@ public class CustServiceImpl implements CustService {
 	@Qualifier("custRepository")
 	private CustRepository custRepository;
 	
-	@Autowired
-	@Qualifier("tipoCustRepository")
-	private TipoCustRepository tipoCustRepository;
+	/*
+	 * @Autowired
+	 * 
+	 * @Qualifier("tipoCustRepository") private TipoCustRepository
+	 * tipoCustRepository;
+	 */
 	
 	@Autowired
 	@Qualifier("userServicio")
@@ -34,10 +37,10 @@ public class CustServiceImpl implements CustService {
 		custRepository.save(cliente);
 	}
 	
-	@Override
-	public ClienteTipo findCustTipe(int tipoCLienteId) {
-		return tipoCustRepository.findById(tipoCLienteId).get();
-	}
+	/*
+	 * @Override public ClienteTipo findCustTipe(int tipoCLienteId) { return
+	 * tipoCustRepository.findById(tipoCLienteId).get(); }
+	 */
 
 	@Override
 	public Cliente findCustById(int clienteId) {
@@ -52,8 +55,9 @@ public class CustServiceImpl implements CustService {
 	@Override
 	public void custUpdate(String usuario, String longitud, String latitud) {
 		Cliente cl = findCustByUser(userServicio.findUserRole(usuario));
-		cl.setLatitud(latitud);
-		cl.setLongitud(longitud);
+		/*
+		 * cl.setLatitud(latitud); cl.setLongitud(longitud);
+		 */
 		custSave(cl);
 		
 	}

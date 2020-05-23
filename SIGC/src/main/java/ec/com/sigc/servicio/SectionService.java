@@ -1,8 +1,8 @@
-package ec.com.siga.service;
+package ec.com.sigc.servicio;
 
 import java.util.List;
 
-import ec.com.siga.entity.Seccion;
+import ec.com.sigc.entidad.Seccion;
 
 public interface SectionService {
 	public abstract List<Seccion> findAllSections();

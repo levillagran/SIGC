@@ -1,8 +1,6 @@
 package ec.com.sigc.modelo;
 
-import lombok.Data;
 
-@Data
 public class Usuario {
 	
 	private String usuario;

@@ -1,4 +1,4 @@
-package ec.com.siga.service.impl;
+package ec.com.sigc.servicio.impl;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import ec.com.siga.entity.Seccion;
-import ec.com.siga.repository.SectionRepository;
-import ec.com.siga.service.SectionService;
+import ec.com.sigc.entidad.Seccion;
+import ec.com.sigc.repositorio.SectionRepository;
+import ec.com.sigc.servicio.SectionService;
 
 @Service("sectionService")
 public class SectionServiceImpl implements SectionService {

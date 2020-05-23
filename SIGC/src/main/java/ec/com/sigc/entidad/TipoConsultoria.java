@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +19,6 @@ public class TipoConsultoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
     @NotNull
     @Column(name = "TIPO_CONSULTORIA_ID")
     private Integer tipoConsultoriaId;
@@ -83,6 +81,12 @@ public class TipoConsultoria implements Serializable {
 		this.tipoConsultoria = tipoConsultoria;
 		this.solicitudConsultoriaList = solicitudConsultoriaList;
 		this.preguntasList = preguntasList;
+	}
+
+	public TipoConsultoria(@NotNull Integer tipoConsultoriaId, @Size(max = 40) String tipoConsultoria) {
+		super();
+		this.tipoConsultoriaId = tipoConsultoriaId;
+		this.tipoConsultoria = tipoConsultoria;
 	}
 
     

@@ -36,11 +36,11 @@
 						</tfoot>
 						<tbody>
 							<tr th:each="contact : ${contacts}">
-								<td><a th:href="@{findTypeQuestionnaire/(id=${contact.tipoAuditoriaId})}"
+								<td><a th:href="@{findTypeQuestionnaire/(id=${contact.tipoConsultoriaId})}"
 										class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
-										th:href="@{deleteTypeQuestionnaire/(id=${contact.tipoAuditoriaId})}"
+										th:href="@{deleteTypeQuestionnaire/(id=${contact.tipoConsultoriaId})}"
 										class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
-								<td th:text="${contact.tipoAuditoria}"></td>
+								<td th:text="${contact.tipoConsultoria}"></td>
 															
 								
 							</tr>

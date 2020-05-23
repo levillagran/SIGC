@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +19,6 @@ public class Seccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
     @NotNull
     @Column(name = "SECCION_ID")
     private Integer seccionId;
@@ -32,6 +30,7 @@ public class Seccion implements Serializable {
     @OneToMany(mappedBy = "seccionId", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Preguntas> preguntasList;
+    
 
     public Integer getSeccionId() {
 		return seccionId;
@@ -60,12 +59,18 @@ public class Seccion implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
 	public Seccion(Integer seccionId, String seccion, List<Preguntas> preguntasList) {
 		super();
 		this.seccionId = seccionId;
 		this.seccion = seccion;
 		this.preguntasList = preguntasList;
+	}
+
+	public Seccion(@NotNull Integer seccionId, @Size(max = 45) String seccion) {
+		super();
+		this.seccionId = seccionId;
+		this.seccion = seccion;
 	}
 
 	public Seccion() {

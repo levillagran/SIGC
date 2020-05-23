@@ -1,4 +1,4 @@
-package ec.com.siga.service.impl;
+package ec.com.sigc.servicio.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import ec.com.siga.entity.Informe;
-import ec.com.siga.repository.CustRepository;
-import ec.com.siga.repository.InformeRepository;
-import ec.com.siga.repository.UserJpaRepository;
-import ec.com.siga.service.InformeService;
+import ec.com.sigc.entidad.Informe;
+import ec.com.sigc.repositorio.CustRepository;
+import ec.com.sigc.repositorio.InformeRepository;
+import ec.com.sigc.repositorio.UserRepository;
+import ec.com.sigc.servicio.InformeService;
 
 @Service("informeServicio")
 public class InformeServiceImpl implements InformeService {
@@ -22,7 +22,7 @@ public class InformeServiceImpl implements InformeService {
 
 	@Autowired
 	@Qualifier("userRepository")
-	private UserJpaRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
 	@Qualifier("custRepository")
@@ -38,7 +38,7 @@ public class InformeServiceImpl implements InformeService {
 		List<Informe> list, auxList = new ArrayList<Informe>();
 		list = informeRepository.findAll();
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 1) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 1) {
 				auxList.add(info);
 			}
 		}
@@ -50,7 +50,7 @@ public class InformeServiceImpl implements InformeService {
 		List<Informe> list, auxList = new ArrayList<Informe>();
 		list = informeRepository.findAll();
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() > 1) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() > 1) {
 				auxList.add(info);
 			}
 		}
@@ -73,7 +73,7 @@ public class InformeServiceImpl implements InformeService {
 		List<Informe> list, auxList = new ArrayList<Informe>();
 		list = informeRepository.findByClienteId(custRepository.findByUserId(userRepository.findByUsuario(username)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() != 3) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() != 3) {
 				auxList.add(info);
 			}
 		}
@@ -85,7 +85,7 @@ public class InformeServiceImpl implements InformeService {
 		List<Informe> list, auxList = new ArrayList<Informe>();
 		list = informeRepository.findByClienteId(custRepository.findByUserId(userRepository.findByUsuario(username)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 3) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 3) {
 				auxList.add(info);
 			}
 		}

@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ec.com.siga.entity.CheckList;
-import ec.com.siga.entity.Informe;
+import ec.com.sigc.entidad.CheckList;
+import ec.com.sigc.entidad.Informe;
+
 
 public interface ConsultorService {
 	public abstract List<Informe> findAllAssignedAudits(String auditor);

@@ -25,9 +25,11 @@ public class TableBackController {
 	private BackOfficeService backOfficeService;
 
 	@GetMapping("/tableBack")
-	public ModelAndView showForm() {
+	@ResponseBody
+	public ModelAndView showForm(String username) {
 		ModelAndView mav = new ModelAndView("tableBack");
 		mav.addObject("contacts", backOfficeService.findAllBack());
+		mav.addObject("username", username);
 		return mav;
 	}
 	

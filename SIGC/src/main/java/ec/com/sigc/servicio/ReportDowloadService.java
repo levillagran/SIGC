@@ -1,4 +1,4 @@
-package ec.com.siga.service;
+package ec.com.sigc.servicio;
 
 public interface ReportDowloadService {
 	public abstract byte[] reportDowloar(Integer informeId);

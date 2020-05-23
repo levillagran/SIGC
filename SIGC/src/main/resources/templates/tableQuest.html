@@ -25,12 +25,12 @@
 			<!-- Choose Type Questionnaire-->
 			<label>Questionnaire Type</label>
 			<div class="form-label-group provin">
-				<select class="form-control" id="tipoAuditoria" required="required">
+				<select class="form-control" id="tipoConsultoria" required="required">
 					<option value="0" disabled selected>Select Questionnaire
 						Type</option>
 					<option th:each="tQuest : ${tQuests}"
-						th:value="${tQuest.tipoAuditoriaId}"
-						th:text="${tQuest.tipoAuditoria}" />
+						th:value="${tQuest.tipoConsultoriaId}"
+						th:text="${tQuest.tipoConsultoria}" />
 				</select> </select>
 			</div>
 

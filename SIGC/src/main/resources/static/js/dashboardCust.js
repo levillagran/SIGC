@@ -1,9 +1,10 @@
 $(document).ready(function () {
-
-	$('.profile').on('click',function(event){
+	
+	$('.profile').on('click', function(event) {
 		event.preventDefault();
-   		$("#seccionRecargarCust").load("profileCust");
-    });
+		var href = $(this).attr('href');
+		$("#seccionRecargarCust").load(href);
+	});
 	
 	$('.tAudits').on('click',function(event){
 		event.preventDefault();

@@ -9,50 +9,54 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import ec.com.siga.entity.CheckList;
-import ec.com.siga.entity.DatoComun;
-import ec.com.siga.entity.DatoEspecifico;
-import ec.com.siga.entity.Foto;
-import ec.com.siga.entity.Informe;
-import ec.com.siga.entity.Preguntas;
-import ec.com.siga.entity.SolicitudAuditoria;
-import ec.com.siga.entity.TipoAuditoria;
-import ec.com.siga.repository.AuditorRepository;
-import ec.com.siga.repository.CheckListRepository;
-import ec.com.siga.repository.DatoComunRepository;
-import ec.com.siga.repository.DatoEspecificoRepository;
-import ec.com.siga.repository.EstadoAuditRepository;
-import ec.com.siga.repository.FotoRepository;
-import ec.com.siga.repository.InformeRepository;
-import ec.com.siga.repository.PreguntasRepository;
-import ec.com.siga.repository.SolicitudAuditoriaRepository;
-import ec.com.siga.repository.TipoAudiRepository;
-import ec.com.siga.repository.TipoCustRepository;
-import ec.com.siga.repository.UserJpaRepository;
-import ec.com.siga.service.AuditorService;
+import ec.com.sigc.entidad.CheckList;
+import ec.com.sigc.entidad.DatoComun;
+import ec.com.sigc.entidad.DatoEspecifico;
+import ec.com.sigc.entidad.Archivo;
+import ec.com.sigc.entidad.Informe;
+import ec.com.sigc.entidad.Preguntas;
+import ec.com.sigc.entidad.SolicitudConsultoria;
+import ec.com.sigc.entidad.TipoConsultoria;
+import ec.com.sigc.repositorio.ConsultorRepository;
+import ec.com.sigc.repositorio.CheckListRepository;
+import ec.com.sigc.repositorio.DatoComunRepository;
+import ec.com.sigc.repositorio.DatoEspecificoRepository;
+import ec.com.sigc.repositorio.EstadoConRepository;
+import ec.com.sigc.repositorio.archivoRepository;
+import ec.com.sigc.repositorio.InformeRepository;
+import ec.com.sigc.repositorio.PreguntasRepository;
+import ec.com.sigc.repositorio.SolicitudConsRepository;
+import ec.com.sigc.repositorio.TipoConsRepository;
+//import ec.com.sigc.repositorio.TipoCustRepository;
+import ec.com.sigc.repositorio.UserRepository;
+import ec.com.sigc.servicio.ConsService;
+import ec.com.sigc.servicio.ConsultorService;
 
-@Service("auditorService")
+@Service("ConsultorService")
 public class ConsultorServiceImpl implements ConsultorService {
 
 	@Autowired
-	@Qualifier("tipoAudiRepository")
-	private TipoConsRepository tipoAudiRepository;
+	@Qualifier("tipoConsRepository")
+	private TipoConsRepository  tipoAudiRepository;
+
+	/*
+	 * @Autowired
+	 * 
+	 * @Qualifier("tipoCustRepository") private TipoCustRepository
+	 * tipoCustRepository;
+	 */
 
 	@Autowired
-	@Qualifier("tipoCustRepository")
-	private TipoCustRepository tipoCustRepository;
-
-	@Autowired
-	@Qualifier("solicitudAuditoriaRepository")
-	private SolicitudAuditoriaRepository solicitudAuditoriaRepository;
+	@Qualifier("solicitudConRepository")
+	private SolicitudConsRepository  solicitudConsultoriaRepository;
 
 	@Autowired
 	@Qualifier("userRepository")
-	private UserJpaRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	@Qualifier("estadoAuditRepository")
-	private EstadoAuditRepository estadoAuditRepository;
+	@Qualifier("estadoConRepository")
+	private EstadoConRepository estadoAuditRepository;
 
 	@Autowired
 	@Qualifier("dComunRepository")
@@ -63,8 +67,8 @@ public class ConsultorServiceImpl implements ConsultorService {
 	private DatoEspecificoRepository dEspecificoRepository;
 
 	@Autowired
-	@Qualifier("auditorRepository")
-	private AuditorRepository auditorRepository;
+	@Qualifier("ConsultorRepository")
+	private ConsultorRepository ConsultorRepository;
 
 	@Autowired
 	@Qualifier("informeRepository")
@@ -75,19 +79,19 @@ public class ConsultorServiceImpl implements ConsultorService {
 	private PreguntasRepository preguntasRepository;
 
 	@Autowired
-	@Qualifier("fotoRepository")
-	private FotoRepository fotoRepository;
+	@Qualifier("archivoRepository")
+	private archivoRepository ArchivoRepository;
 
 	@Autowired
 	@Qualifier("checkListRepository")
 	private CheckListRepository checkListRepository;
 
 	@Override
-	public List<Informe> findAllAssignedAudits(String auditor) {
+	public List<Informe> findAllAssignedAudits(String Consultor) {
 		List<Informe> list, auxList = new ArrayList<Informe>();
-		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		list = informeRepository.findByConsultorId(ConsultorRepository.findByUserId(userRepository.findByUsuario(Consultor)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 2) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 2) {
 				auxList.add(info);
 			}
 		}
@@ -98,13 +102,13 @@ public class ConsultorServiceImpl implements ConsultorService {
 	public void createCkeckList(int informeId) {
 		Informe informe = informeRepository.findById(informeId).get();
 		DatoComun dc = informe.getDatoComunId();
-		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
-		String aId = String.valueOf(sa.getSolicitudAuditoriaId());
+		SolicitudConsultoria sa = dc.getSolicitudConsultoriaId();
+		String aId = String.valueOf(sa.getSolicitudConsultoriaId());
 		String bId, res;
-		TipoAuditoria ta = sa.getTipoAuditoriaId();
-		List<Preguntas> pre = preguntasRepository.findByTipoAuditoriaId(ta);
+		TipoConsultoria ta = sa.getTipoConsultoriaId();
+		List<Preguntas> pre = preguntasRepository.findByTipoConsultoriaId(ta);
 
-		if (checkListRepository.findAllBySolicitudAuditoriaId(sa).isEmpty()) {
+		if (checkListRepository.findAllBySolicitudConsultoriaId(sa).isEmpty()) {
 			int j = 0;
 			for (Preguntas i : pre) {
 				j = j + 1;
@@ -117,7 +121,7 @@ public class ConsultorServiceImpl implements ConsultorService {
 				res = aId + bId;
 
 				cl.setCodigo(Integer.parseInt(res));
-				cl.setSolicitudAuditoriaId(sa);
+				cl.setSolicitudConsultoriaId(sa);
 				cl.setPreguntasId(i);
 				checkListRepository.save(cl);
 			}
@@ -129,7 +133,7 @@ public class ConsultorServiceImpl implements ConsultorService {
 	public CheckList reply(int informeId) {
 		Informe informe = informeRepository.findById(informeId).get();
 		List<CheckList> preguntas = checkListRepository
-				.findAllBySolicitudAuditoriaId(informe.getDatoComunId().getSolicitudAuditoriaId());
+				.findAllBySolicitudConsultoriaId(informe.getDatoComunId().getSolicitudConsultoriaId());
 		return preguntas.get(0);
 	}
 
@@ -137,7 +141,7 @@ public class ConsultorServiceImpl implements ConsultorService {
 	public CheckList replyUploadFile(int informeId) {
 		Informe informe = informeRepository.findById(informeId).get();
 		List<CheckList> preguntas = checkListRepository
-				.findAllBySolicitudAuditoriaId(informe.getDatoComunId().getSolicitudAuditoriaId());
+				.findAllBySolicitudConsultoriaId(informe.getDatoComunId().getSolicitudConsultoriaId());
 		for (CheckList pre : preguntas) {
 			if (pre.getDatoEspecificoId().isRespuesta() == false) {
 				return pre;
@@ -184,19 +188,19 @@ public class ConsultorServiceImpl implements ConsultorService {
 		System.out.println(evidencia);
 		System.out.println(respuesta);
 		
-		Foto foto = new Foto();
+		Archivo Archivo = new Archivo();
 		DatoEspecifico de = new DatoEspecifico();
 		try {
 			if (f.isEmpty()) {
 				System.out.println("entra a no hacer nada");
 			}else {
-				System.out.println("entra a guardar foto");
-				foto.setFoto(f.getBytes());
-				fotoRepository.save(foto);
-				de.setFotoId(foto);
+				System.out.println("entra a guardar Archivo");
+				Archivo.setArchivo(f.getBytes());
+				ArchivoRepository.save(Archivo);
+				de.setArchivoId(Archivo);
 			}
 			
-			// foto.setFileName(Base64.encodeBase64String(f.getBytes()));
+			// Archivo.setFileName(Base64.encodeBase64String(f.getBytes()));
 		} catch (IOException e) {
 			System.out.println("guardar catch");
 		}
@@ -214,11 +218,11 @@ public class ConsultorServiceImpl implements ConsultorService {
 	}
 
 	@Override
-	public List<Informe> findAllAuditsHistory(String auditor) {
+	public List<Informe> findAllAuditsHistory(String Consultor) {
 		List<Informe> list, auxList = new ArrayList<Informe>();
-		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		list = informeRepository.findByConsultorId(ConsultorRepository.findByUserId(userRepository.findByUsuario(Consultor)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 5) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 5) {
 				auxList.add(info);
 			}
 		}
@@ -229,10 +233,10 @@ public class ConsultorServiceImpl implements ConsultorService {
 	public String sendNonConformities(Integer informeId) {
 		Informe inf = informeRepository.findById(informeId).get();
 		DatoComun dc = inf.getDatoComunId();
-		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
+		SolicitudConsultoria sa = dc.getSolicitudConsultoriaId();
 
 		List<CheckList> listChck = checkListRepository
-				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+				.findAllBySolicitudConsultoriaId(inf.getDatoComunId().getSolicitudConsultoriaId());
 		String finish = null;
 		int finishAux = 0;
 		for (CheckList lChck : listChck) {
@@ -245,8 +249,8 @@ public class ConsultorServiceImpl implements ConsultorService {
 			finish = "Have questions whitout reply";
 		} else {
 			finish = "Request for evidence sent and first qualification sent";
-			sa.setEstadoAuditoriaId(estadoAuditRepository.findById(3).get());
-			dc.setSolicitudAuditoriaId(sa);
+			sa.setEstadoConsultoriaId(estadoAuditRepository.findById(3).get());
+			dc.setSolicitudConsultoriaId(sa);
 			dc.setCalificacion(firstQualification(inf));
 			inf.setDatoComunId(dc);
 			informeRepository.save(inf);
@@ -258,20 +262,20 @@ public class ConsultorServiceImpl implements ConsultorService {
 	public String sendToCheck(Integer informeId) {
 		Informe inf = informeRepository.findById(informeId).get();
 		DatoComun dc = inf.getDatoComunId();
-		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
-		sa.setEstadoAuditoriaId(estadoAuditRepository.findById(4).get());
-		dc.setSolicitudAuditoriaId(sa);
+		SolicitudConsultoria sa = dc.getSolicitudConsultoriaId();
+		sa.setEstadoConsultoriaId(estadoAuditRepository.findById(4).get());
+		dc.setSolicitudConsultoriaId(sa);
 		inf.setDatoComunId(dc);
 		informeRepository.save(inf);
 		return "Request for evidence sent";
 	}
 
 	@Override
-	public List<Informe> findAllAuditsSendNC(String auditor) {
+	public List<Informe> findAllAuditsSendNC(String Consultor) {
 		List<Informe> list, auxList = new ArrayList<Informe>();
-		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		list = informeRepository.findByConsultorId(ConsultorRepository.findByUserId(userRepository.findByUsuario(Consultor)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 3) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 3) {
 				auxList.add(info);
 			}
 		}
@@ -279,11 +283,11 @@ public class ConsultorServiceImpl implements ConsultorService {
 	}
 
 	@Override
-	public List<Informe> findAllAuditsToCheck(String auditor) {
+	public List<Informe> findAllAuditsToCheck(String Consultor) {
 		List<Informe> list, auxList = new ArrayList<Informe>();
-		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		list = informeRepository.findByConsultorId(ConsultorRepository.findByUserId(userRepository.findByUsuario(Consultor)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 4) {
+			if (info.getDatoComunId().getSolicitudConsultoriaId().getEstadoConsultoriaId().getEstadoConsultoriaId() == 4) {
 				auxList.add(info);
 			}
 		}
@@ -293,7 +297,7 @@ public class ConsultorServiceImpl implements ConsultorService {
 	@Override
 	public Integer firstQualification(Informe inf) {
 		List<CheckList> listChck = checkListRepository
-				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+				.findAllBySolicitudConsultoriaId(inf.getDatoComunId().getSolicitudConsultoriaId());
 		int numPreguntas = 0;
 		int numSi = 0;
 		for (CheckList cl : listChck) {
@@ -311,7 +315,7 @@ public class ConsultorServiceImpl implements ConsultorService {
 		DatoComun dc = inf.getDatoComunId();
 		
 		List<CheckList> listChck = checkListRepository
-				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+				.findAllBySolicitudConsultoriaId(inf.getDatoComunId().getSolicitudConsultoriaId());
 		int numPreguntas = 0;
 		int numSi = 0;
 		for (CheckList cl : listChck) {

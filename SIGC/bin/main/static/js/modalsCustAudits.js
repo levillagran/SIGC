@@ -1,18 +1,21 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $('.nBtn, .table .eBtn').on('click', function (event) {
-        event.preventDefault();
-        var href = $(this).attr('href');
-        var text = $(this).text();
-
-        if (text == '_') {
-
-
-            $.get(href, function (user, status) {
-            	$('.myForm #userId').val(user.userId);
-                $('.myForm #firstName').val(user.nombre);
-               	$('.myForm #lastName').val(user.apellido);
-               	$('.myForm #role').val(user.roleId.rol);
+	$('.tSect').on('click', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$("#seccionRecargar").load(href);
+	});
+	
+	$('.nBtn, .table .eBtn').on('click', function(event) {
+		event.preventDefault();
+		var href = $(this).attr('href');
+		var text = $(this).text();
+		if (text == '_') {
+			$.get(href, function(user, status) {
+				$('.myForm #userId').val(user.userId);
+				$('.myForm #firstName').val(user.nombre);
+				$('.myForm #lastName').val(user.apellido);
+				$('.myForm #role').val(user.roleId.rol);
 				$('.myForm #inputEmail').val(user.correoElectronico);
 				$('.myForm #inputAddress').val(user.direccion);
 				$('.myForm #inputPhone1').val(user.numeroTelefono1);
@@ -20,46 +23,46 @@ $(document).ready(function () {
 				$('.myForm #inputUsername').val(user.usuario);
 				$('.myForm #inputPassword').val(user.clave);
 				$('.myForm #enabled').val(user.enabled);
-					
-				if(user.enabled){
+
+				if (user.enabled) {
 					$("#enabled").prop('checked', true);
-					}
-					else
+				} else
 					$("#enabled").prop('checked', false);
 
+			});
+			$('.modal-body').load('editAdmin', function() {
+				$('.myForm #exampleModal').modal({
+					show : true
+				});
+			});
 
-            });
-            $('.modal-body').load('editAdmin',function(){
-		        $('.myForm #exampleModal').modal({show:true});
-		    });
-           
-        } else {
+		} else {
 
-        	$('.modal-body').load(href,function(){
-		        $('.myForm #exampleModalRequest').modal({show:true});
-		    });
-        }
+			$('.modal-body').load(href, function() {
+				$('.myForm #exampleModalRequest').modal({
+					show : true
+				});
+			});
+		}
 
-    });
+	});
 
-    $('.table .dBtn').on('click', function (event) {
-        event.preventDefault();
-        var href = $(this).attr('href');
-        $('#deleteModal #delHref').attr('href', href);
-        $('#deleteModal').modal();
-
-
-    });
-    
-/*    $('.report').on('click',function(event){
+	$('.table .dBtn').on('click', function(event) {
 		event.preventDefault();
 		var href = $(this).attr('href');
-		$.get(href, function (msg, status) {
-			$('.modal-body').append('<p class="alert alert-success">'+Downloaded report+'</p>');
-		});
-		$('.myFormDowloadReport #exampleModal').modal({show:true});
-            
-		 });
-    });*/
+		$('#deleteModal #delHref').attr('href', href);
+		$('#deleteModal').modal();
+
+	});
+
+	/*
+	 * $('.report').on('click',function(event){ event.preventDefault(); var href =
+	 * $(this).attr('href'); $.get(href, function (msg, status) {
+	 * $('.modal-body').append('<p class="alert alert-success">'+Downloaded
+	 * report+'</p>'); }); $('.myFormDowloadReport
+	 * #exampleModal').modal({show:true});
+	 * 
+	 * }); });
+	 */
 
 });

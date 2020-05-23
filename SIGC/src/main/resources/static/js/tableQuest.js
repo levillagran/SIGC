@@ -5,7 +5,7 @@ $(document).ready(function () {
         var href = $(this).attr('href');
         alert(href);
         var text = $(this).text();
-        var tAu = $('#tipoAuditoria').val();
+        var tAu = $('#tipoConsultoria').val();
         var sec = $('.seccion').val();
 
 
@@ -41,9 +41,9 @@ $(document).ready(function () {
     });
     
     
-    $('#tipoAuditoria').change(function(){
+    $('#tipoConsultoria').change(function(){
 		$('.seccion').removeAttr('disabled');
-        $.get('sectionQuest',{tipoAuditoria : $('#tipoAuditoria').val()},function(obj) {
+        $.get('sectionQuest',{tipoConsultoria : $('#tipoConsultoria').val()},function(obj) {
         	$(".seccion").empty();
         	$(".seccion").append('<option value="0" disabled selected>Select Questionnaire Type</option>');
         	$.each(obj, function(arregloId, seccion){
@@ -55,7 +55,7 @@ $(document).ready(function () {
     } );
     
     $('.seccion').change(function(){
-		$.get('questions',{tipoAuditoria : $('#tipoAuditoria').val(), seccion : $('.seccion').val()},function(obj) {
+		$.get('questions',{tipoConsultoria : $('#tipoConsultoria').val(), seccion : $('.seccion').val()},function(obj) {
 			$(".tQuestions tbody").empty();
 			$(".nBtn").removeAttr('disabled');
         	$.each(obj, function(arregloId, quest){

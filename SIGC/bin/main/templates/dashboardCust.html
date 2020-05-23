@@ -110,21 +110,21 @@
         </li>
         <!-- Cuenta del cliente -->
         <li class="nav-item">
-          <a class="nav-link profile" href="#">
+          <a class="nav-link profile" th:href="@{profileCust/(usuario=${username})}">
             <i class="fas fa-fw fa-user-astronaut" ></i>
-            <span>Profile</span></a>
+            <span>Perfil</span></a>
         </li>
         <!-- consulta sus auditorias -->
         <li class="nav-item">
           <a th:href="@{tableCustAudits/(usuario=${username})}" class="nav-link tAudits">
             <i class="fas fa-fw fa-list-alt"></i>
-            <span>Audits</span></a>
+            <span>Consultorias</span></a>
         </li>
         <!-- enviar evidencia -->
         <li class="nav-item">
           <a th:href="@{tableCustAuditsNC/(usuario=${username})}" class="nav-link sendEvidenceCust">
             <i class="fas fa-fw fa fa-paper-plane"></i>
-            <span>Send Evidence</span></a>
+            <span></span></a>
         </li>
       </ul>
 

@@ -26,17 +26,20 @@ $(document).ready(function() {
 
 	$('.tBackOfc').on('click', function(event) {
 		event.preventDefault();
-		$("#seccionRecargar").load("tableBack");
+		var href = $(this).attr('href');
+		$("#seccionRecargar").load(href);
 	});
 
 	$('.tAudi').on('click', function(event) {
 		event.preventDefault();
-		$("#seccionRecargar").load("tableAudi");
+		var href = $(this).attr('href');
+		$("#seccionRecargar").load(href);
 	});
-
+	
 	$('.tCust').on('click', function(event) {
 		event.preventDefault();
-		$("#seccionRecargar").load("tableCust");
+		var href = $(this).attr('href');
+		$("#seccionRecargar").load(href);
 	});
 
 	$('.tRole').on('click', function(event) {

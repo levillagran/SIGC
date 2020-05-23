@@ -20,12 +20,10 @@ public class Preguntas implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
     @NotNull
     @Column(name = "PREGUNTAS_ID")
     private Integer preguntasId;
     
-    @Size(max = 200)
     @Column(name = "PREGUNTAS")
     private String preguntas;
     
@@ -35,6 +33,7 @@ public class Preguntas implements Serializable {
     @JoinColumn(name = "SECCION_ID", referencedColumnName = "SECCION_ID")
     @ManyToOne
     private Seccion seccionId;
+    
     @JoinColumn(name = "TIPO_CONSULTORIA_ID", referencedColumnName = "TIPO_CONSULTORIA_ID")
     @ManyToOne
     private TipoConsultoria tipoConsultoriaId;
@@ -83,12 +82,21 @@ public class Preguntas implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Preguntas(@NotNull Integer preguntasId, @Size(max = 200) String preguntas, List<CheckList> checkListList,
+	public Preguntas(@NotNull Integer preguntasId, String preguntas, List<CheckList> checkListList,
 			Seccion seccionId, TipoConsultoria tipoConsultoriaId) {
 		super();
 		this.preguntasId = preguntasId;
 		this.preguntas = preguntas;
 		this.checkListList = checkListList;
+		this.seccionId = seccionId;
+		this.tipoConsultoriaId = tipoConsultoriaId;
+	}
+
+	public Preguntas(@NotNull Integer preguntasId, @Size(max = 200) String preguntas, Seccion seccionId,
+			TipoConsultoria tipoConsultoriaId) {
+		super();
+		this.preguntasId = preguntasId;
+		this.preguntas = preguntas;
 		this.seccionId = seccionId;
 		this.tipoConsultoriaId = tipoConsultoriaId;
 	}

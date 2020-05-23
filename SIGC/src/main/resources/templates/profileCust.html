@@ -14,18 +14,21 @@
 				<div class="well well-sm">
 					<div class="row">
 						<div class="col-sm-6 col-md-4">
-							<img src="imgs/profile.png" alt=""	class="img-responsive img-thumbnail" />
+							<img src="imgs/profile.png" alt=""
+								class="img-responsive img-thumbnail" />
 						</div>
 						<div class="col-sm-6 col-md-8">
-							<h4>Bhaumik Patel</h4>
-							<small><cite title="San Francisco, USA">San
-									Francisco, USA <i class="glyphicon glyphicon-map-marker"> </i>
+							<h4 th:text="${cliente.userId.nombre}"></h4>
+
+							<small><cite th:text="${cliente.nombreEmpresa}"><i class="glyphicon glyphicon-map-marker"> </i>
 							</cite></small>
 							<p>
-								<i class="glyphicon glyphicon-envelope"></i>email@example.com <br />
+								<i class="glyphicon glyphicon-envelope" th:text="${cliente.userId.mail}"></i><br />
+								<i class="glyphicon glyphicon-envelope" th:text="${cliente.userId.telefono}"></i><br />
+								<i class="glyphicon glyphicon-envelope" th:text="${cliente.userId.direccion}"></i><br />
 								<i class="glyphicon glyphicon-globe"></i><a
-									href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a> <br />
-								<i class="glyphicon glyphicon-gift"></i>June 02, 1988
+									href="http://www.lenervil.com">www.lenervil.com</a> <br />
+				
 							</p>
 							<!-- Split button -->
 							<div class="btn-group">
